@@ -1,21 +1,11 @@
-//
-//  ContentView.swift
-//  SyncTime
-//
-//  Created by Nicho on 24/09/2024.
-//
-
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
+    @Environment(\.modelContext) var modelContext
+    @State private var path = [Project]()
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
+        ProjectView(path: $path)
     }
 }
 

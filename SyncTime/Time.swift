@@ -9,7 +9,8 @@ import Foundation
 import SwiftData
 
 @Model
-class Time {
+class Time: Hashable {
+    var id = UUID()
     var name: String = "Untitle Time"
     var duration: Int64 = 0
     var startDate: Date = Date.now
