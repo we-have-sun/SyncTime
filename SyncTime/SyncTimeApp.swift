@@ -13,5 +13,6 @@ struct SyncTimeApp: App {
         WindowGroup {
             ContentView()
         }
+        .modelContainer(for: Project.self)
     }
 }
