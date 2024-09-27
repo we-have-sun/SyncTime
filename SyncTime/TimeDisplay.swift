@@ -1,9 +1,9 @@
 import SwiftUI
 import SwiftData
 
-
-class ProjectModel: ObservableObject {
-    @Published var project: Project
+@Observable
+class ProjectModel {
+    var project: Project
     init(project: Project) {
         self.project = project
     }
@@ -12,7 +12,7 @@ class ProjectModel: ObservableObject {
 
 struct TimeDisplay: View {
     @Environment(\.modelContext) var modelContext
-    @ObservedObject var project: ProjectModel
+    @State var project: ProjectModel
     @State private var times: [Time] = []
     
     init(project: Project) {
@@ -22,7 +22,9 @@ struct TimeDisplay: View {
     
     var body: some View{
         ForEach(project.project.times ?? [], id:\.self) { time in
-            TestTimer(time: time)
+            Text("Time Duration: \(time.duration)")
+                .font(.caption)
+                .foregroundStyle(time.isRunning ? .red : .black)
         }
         .onAppear {
             // Reload the times array when the view appears
@@ -32,13 +34,7 @@ struct TimeDisplay: View {
             times = project.project.times ?? []
             print("CINT \(project.project.times?.count ?? 0 )")
         }
-        
-//        .onChange(of: times){
-//            print("Times they are a-changing")
-//        }
 
-        
-        
     }
     
     

@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-class Time: Hashable, Equatable {
+class Time: Hashable {
     var name: String = "Untitle Time"
     var duration: Int64 = 0
     var isRunning: Bool = false
@@ -24,8 +24,6 @@ class Time: Hashable, Equatable {
         self.isRunning = isRunning
         self.project = project
     }
-    static func == (lhs: Time, rhs: Time) -> Bool {
-            return lhs.id == rhs.id && lhs.name == rhs.name && lhs.duration == rhs.duration
-        }
+
     
 }

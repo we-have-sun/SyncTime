@@ -42,11 +42,13 @@ struct ProjectRowView: View {
     }
 
     func updateZeroDurationExists() {
-        zeroDurationExists = project.times?.contains { $0.duration == 0 } ?? false
+        zeroDurationExists = timesByProjects.contains { $0.duration == 0 }
         }
     func addTime(to project: Project) {
         let time = Time(name: "", duration: 0, startDate: .now, isRunning: true)
+        //project.times?.append(time)
         time.project = project
+        
         do {
            try modelContext.save()
         } catch {
@@ -55,11 +57,12 @@ struct ProjectRowView: View {
         
     }
     func calculateDurationAndPause(for project: Project) {
-        guard let times = project.times else { return }
+        let times = timesByProjects
         if let zeroDurationTime = times.first(where: { $0.duration == 0 }) {
             if zeroDurationTime.startDate != nil {
                 zeroDurationTime.duration = Int64(Date().timeIntervalSince(zeroDurationTime.startDate ?? Date.now))
                 zeroDurationTime.isRunning = false
+                //project.times?.append(zeroDurationTime)
                 zeroDurationTime.project = project
                 
                 do {
@@ -73,6 +76,7 @@ struct ProjectRowView: View {
         }
         do {
            try modelContext.save()
+            
         } catch {
            print(error)
         }
