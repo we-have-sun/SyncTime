@@ -1,68 +1,82 @@
 import SwiftUI
 import SwiftData
 
+
 struct ProjectRowView: View {
     @Environment(\.modelContext) var modelContext
     @Bindable var project: Project
+    @Query private var times: [Time]
+    private var timesByProjects: [Time] {
+        times.filter { $0.project?.id == project.id}
+     }
+    
     @State private var zeroDurationExists: Bool = false
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                TextField("Project", text: Binding(
-                    get: { project.name },
-                    set: { project.name = $0 }
-                ))
-                .onChange(of: project.name) {
-                    try? modelContext.save()
-                }
-                
-                if let times = project.times {
-                    if times == [] {
-                        Text("No time recorded")
-                            .font(.caption)
-                    }
-                    ForEach(Array(times), id: \.self) { time in
-                        Text("Time Duration: \(time.duration)")
-                            .font(.caption)
-                    }
-               }
+                Text(project.name)
+                    .foregroundStyle(project.hasRunningTimers ? .red : .black)
+                TimeDisplay(project: project)
             }
-            
-            if !zeroDurationExists {
-                            Image(systemName: "play")
-                                .onTapGesture {
-                                    addTime(to: project)
-                                    updateZeroDurationExists()
-                                }
-                        }
-            if  zeroDurationExists {
+            if !project.hasRunningTimers {
+                Image(systemName: "play")
+                    .onTapGesture {
+                        addTime(to: project)
+                        updateZeroDurationExists()
+                    }
+            }
+            if project.hasRunningTimers {
                 Image(systemName: "pause")
                     .onTapGesture {
                         calculateDurationAndPause(for: project)
                         updateZeroDurationExists()
                     }
-            }
-                    }
-        .onAppear(perform: updateZeroDurationExists)
-                .onChange(of: project.times) {
-                    updateZeroDurationExists()
                 }
+            }
+        .onAppear{
+            updateZeroDurationExists()
+        }
+        .onChange(of: times) {
+            updateZeroDurationExists()
+        }
     }
+
     func updateZeroDurationExists() {
-            zeroDurationExists = project.times?.contains { $0.duration == 0 } ?? false
+        zeroDurationExists = project.times?.contains { $0.duration == 0 } ?? false
         }
     func addTime(to project: Project) {
-        let newTime = Time(name: "", duration: 0, startDate: .now)
-        project.times?.append(newTime)
-        try? modelContext.save()
+        let time = Time(name: "", duration: 0, startDate: .now, isRunning: true)
+        time.project = project
+        do {
+           try modelContext.save()
+        } catch {
+           print(error)
+        }
+        
     }
     func calculateDurationAndPause(for project: Project) {
         guard let times = project.times else { return }
         if let zeroDurationTime = times.first(where: { $0.duration == 0 }) {
-            zeroDurationTime.duration = Int64(Date().timeIntervalSince(zeroDurationTime.startDate))
+            if zeroDurationTime.startDate != nil {
+                zeroDurationTime.duration = Int64(Date().timeIntervalSince(zeroDurationTime.startDate ?? Date.now))
+                zeroDurationTime.isRunning = false
+                zeroDurationTime.project = project
+                
+                do {
+                   try modelContext.save()
+                } catch {
+                   print(error)
+                }
+                print("Time is paused: \(zeroDurationTime.hashValue)")
+                
+            }
+        }
+        do {
+           try modelContext.save()
+        } catch {
+           print(error)
         }
     }
-
 }
 
 

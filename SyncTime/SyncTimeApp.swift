@@ -12,8 +12,17 @@ import SwiftData
 struct SyncTimeApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabView {
+                ContentView()
+                    .tabItem {
+                        Label("List of task", systemImage: "list.triangle")
+                    }
+                Timers()
+                    .tabItem {
+                        Label("Timer", systemImage: "timer")
+                    }
+            }
         }
-        .modelContainer(for: Project.self)
+        .modelContainer(for: [Project.self, Time.self])
     }
 }
