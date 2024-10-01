@@ -11,10 +11,7 @@ class ProjectModel {
 
 
 struct TimeDisplay: View {
-    @Environment(\.modelContext) var modelContext
-    @State var project: ProjectModel
-    @State private var times: [Time] = []
-    
+    var project: ProjectModel
     init(project: Project) {
             let projectModel = ProjectModel(project: project)
             self.project = projectModel
@@ -26,16 +23,5 @@ struct TimeDisplay: View {
                 .font(.caption)
                 .foregroundStyle(time.isRunning ? .red : .black)
         }
-        .onAppear {
-            // Reload the times array when the view appears
-            times = project.project.times ?? []
-        }
-        .onChange(of: project.project.times) {
-            times = project.project.times ?? []
-            print("CINT \(project.project.times?.count ?? 0 )")
-        }
-
     }
-    
-    
 }

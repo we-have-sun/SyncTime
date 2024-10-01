@@ -46,8 +46,8 @@ struct ProjectRowView: View {
         }
     func addTime(to project: Project) {
         let time = Time(name: "", duration: 0, startDate: .now, isRunning: true)
-        //project.times?.append(time)
-        time.project = project
+        project.times?.append(time)
+        //time.project = project
         
         do {
            try modelContext.save()
@@ -65,12 +65,19 @@ struct ProjectRowView: View {
                 //project.times?.append(zeroDurationTime)
                 zeroDurationTime.project = project
                 
+                
+                let temporaryTime = zeroDurationTime.copy() as! Time
+                modelContext.delete(zeroDurationTime)
+                project.times?.append(temporaryTime)
+                
                 do {
                    try modelContext.save()
                 } catch {
                    print(error)
                 }
-                print("Time is paused: \(zeroDurationTime.hashValue)")
+                
+                
+                
                 
             }
         }

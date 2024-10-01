@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-class Time: Hashable {
+class Time: NSCopying  {
     var name: String = "Untitle Time"
     var duration: Int64 = 0
     var isRunning: Bool = false
@@ -17,13 +17,17 @@ class Time: Hashable {
     var project: Project?
     
     
-    init(name: String, duration: Int64, startDate: Date, parent: Project? = nil, isRunning: Bool) {
+    init(name: String, duration: Int64, startDate: Date, project: Project? = nil, isRunning: Bool) {
         self.name = name
         self.duration = duration
         self.startDate = startDate
         self.isRunning = isRunning
         self.project = project
     }
-
+    
+    func copy(with zone: NSZone? = nil) -> Any {
+        let copy = Time(name: name, duration: duration, startDate:startDate ?? Date.now, isRunning: isRunning)
+            return copy
+        }
     
 }
