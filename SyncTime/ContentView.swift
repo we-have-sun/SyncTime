@@ -3,13 +3,18 @@ import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) var modelContext
-    @State private var path = [Project]()
     var body: some View {
-        ProjectView(path: $path)
+        ProjectView()
     }
     
 }
 
-#Preview {
+#Preview("Empty Screen") {
     ContentView()
+        .modelContainer(DataController.previewContainer)
+}
+
+#Preview("With Projects") {
+    ContentView()
+        .modelContainer(DataController.previewContainer)
 }

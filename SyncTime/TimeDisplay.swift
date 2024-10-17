@@ -1,14 +1,6 @@
 import SwiftUI
 import SwiftData
 
-@Observable
-class ProjectModel {
-    var project: Project
-    init(project: Project) {
-        self.project = project
-    }
-}
-
 
 struct TimeDisplay: View {
     var project: ProjectModel
@@ -18,10 +10,15 @@ struct TimeDisplay: View {
         }
     
     var body: some View{
-        ForEach(project.project.times ?? [], id:\.self) { time in
-            Text("Time Duration: \(time.duration)")
-                .font(.caption)
-                .foregroundStyle(time.isRunning ? .red : .black)
+        ForEach(project.project.times ?? []) { time in
+            if time.isRunning {
+                RunningTime(time: time)
+            } else {
+                Text("Past Duration: \(time.duration)")
+                    .font(.caption)
+            }
+            
+            
         }
     }
 }

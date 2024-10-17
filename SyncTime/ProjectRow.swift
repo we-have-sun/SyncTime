@@ -1,10 +1,25 @@
 import SwiftUI
 import SwiftData
 
+@Observable
+class ProjectModel {
+    var project: Project
+    init(project: Project) {
+        self.project = project
+    }
+}
 
 struct ProjectRowView: View {
     @Environment(\.modelContext) var modelContext
     @Bindable var project: Project
+    
+    //new
+//    var project: ProjectModel
+//    init(project: Project) {
+//            let projectModel = ProjectModel(project: project)
+//            self.project = projectModel
+//        }
+//    
     @Query private var times: [Time]
     private var timesByProjects: [Time] {
         times.filter { $0.project?.id == project.id}
@@ -12,26 +27,33 @@ struct ProjectRowView: View {
     
     @State private var zeroDurationExists: Bool = false
     var body: some View {
-        HStack {
-            VStack(alignment: .leading) {
-                Text(project.name)
-                    .foregroundStyle(project.hasRunningTimers ? .red : .black)
-                TimeDisplay(project: project)
-            }
-            if !project.hasRunningTimers {
-                Image(systemName: "play")
-                    .onTapGesture {
-                        addTime(to: project)
-                        updateZeroDurationExists()
-                    }
-            }
-            if project.hasRunningTimers {
-                Image(systemName: "pause")
+        HStack(spacing: 16) {
+            Group {
+                if !project.hasRunningTimers {
+                    Image(systemName: "play")
+                        .onTapGesture {
+                            addTime(to: project)
+                            updateZeroDurationExists()
+                        }
+                }
+                if project.hasRunningTimers {
+                    Image(systemName: "pause")
                     .onTapGesture {
                         calculateDurationAndPause(for: project)
                         updateZeroDurationExists()
                     }
                 }
+                
+            }
+            
+            VStack(alignment: .leading) {
+                Text(project.name)
+                    .font(.title2)
+//                  .foregroundStyle(project.hasRunningTimers ? .red : .black)
+                TimeDisplay(project: project)
+                TimerTotal(project: project)
+            }
+            
             }
         .onAppear{
             updateZeroDurationExists()
@@ -44,6 +66,7 @@ struct ProjectRowView: View {
     func updateZeroDurationExists() {
         zeroDurationExists = timesByProjects.contains { $0.duration == 0 }
         }
+    @MainActor
     func addTime(to project: Project) {
         let time = Time(name: "", duration: 0, startDate: .now, isRunning: true)
         project.times?.append(time)
@@ -63,13 +86,13 @@ struct ProjectRowView: View {
                 zeroDurationTime.duration = Int64(Date().timeIntervalSince(zeroDurationTime.startDate ?? Date.now))
                 zeroDurationTime.isRunning = false
                 //project.times?.append(zeroDurationTime)
-                zeroDurationTime.project = project
                 
+                zeroDurationTime.project = project
                 
                 let temporaryTime = zeroDurationTime.copy() as! Time
                 modelContext.delete(zeroDurationTime)
                 project.times?.append(temporaryTime)
-                
+//                
                 do {
                    try modelContext.save()
                 } catch {

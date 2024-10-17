@@ -2,7 +2,7 @@ import Foundation
 import SwiftData
 
 @Model
-class Project: Hashable {
+class Project {
     var name: String = "Untitled"
     var creationDate: Date = Date.now
     var times: [Time]? = [Time]()
@@ -19,4 +19,5 @@ class Project: Hashable {
         self.name = name
         self.creationDate = creationDate
     }
+
 }

@@ -26,3 +26,4 @@ struct SyncTimeApp: App {
         .modelContainer(for: [Project.self, Time.self])
     }
 }
+

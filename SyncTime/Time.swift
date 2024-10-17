@@ -16,6 +16,9 @@ class Time: NSCopying  {
     var startDate: Date? = Date.now
     var project: Project?
     
+    //Event: startDate, endDate = startDate
+    //Interval: startDate, endDate? (no value means it's running), method to calculate to duration.
+    
     
     init(name: String, duration: Int64, startDate: Date, project: Project? = nil, isRunning: Bool) {
         self.name = name
