@@ -6,11 +6,58 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		674AC7102CC16F4800FB4F46 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 674AC70F2CC16F4800FB4F46 /* WidgetKit.framework */; };
+		674AC7122CC16F4800FB4F46 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 674AC7112CC16F4800FB4F46 /* SwiftUI.framework */; };
+		674AC71E2CC16F4A00FB4F46 /* Time WidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 674AC70D2CC16F4800FB4F46 /* Time WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		674AC71C2CC16F4A00FB4F46 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 67818A392CA2CA3000CE5B9A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 674AC70C2CC16F4800FB4F46;
+			remoteInfo = "Time WidgetExtension";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		674AC71F2CC16F4A00FB4F46 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				674AC71E2CC16F4A00FB4F46 /* Time WidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		674AC70D2CC16F4800FB4F46 /* Time WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Time WidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		674AC70F2CC16F4800FB4F46 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = /System/Library/Frameworks/WidgetKit.framework; sourceTree = "<absolute>"; };
+		674AC7112CC16F4800FB4F46 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = /System/Library/Frameworks/SwiftUI.framework; sourceTree = "<absolute>"; };
 		67818A412CA2CA3000CE5B9A /* SyncTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SyncTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		674AC7232CC16F4A00FB4F46 /* Exceptions for "Time Widget" folder in "Time WidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 674AC70C2CC16F4800FB4F46 /* Time WidgetExtension */;
+		};
+		674AC72E2CC1736100FB4F46 /* Exceptions for "SyncTime" folder in "Time WidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				TimerAttributes.swift,
+			);
+			target = 674AC70C2CC16F4800FB4F46 /* Time WidgetExtension */;
+		};
 		67818A5C2CA2CD8900CE5B9A /* Exceptions for "SyncTime" folder in "SyncTime" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -21,10 +68,19 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		674AC7132CC16F4800FB4F46 /* Time Widget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				674AC7232CC16F4A00FB4F46 /* Exceptions for "Time Widget" folder in "Time WidgetExtension" target */,
+			);
+			path = "Time Widget";
+			sourceTree = "<group>";
+		};
 		67818A432CA2CA3000CE5B9A /* SyncTime */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				67818A5C2CA2CD8900CE5B9A /* Exceptions for "SyncTime" folder in "SyncTime" target */,
+				674AC72E2CC1736100FB4F46 /* Exceptions for "SyncTime" folder in "Time WidgetExtension" target */,
 			);
 			path = SyncTime;
 			sourceTree = "<group>";
@@ -32,6 +88,15 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		674AC70A2CC16F4800FB4F46 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				674AC7122CC16F4800FB4F46 /* SwiftUI.framework in Frameworks */,
+				674AC7102CC16F4800FB4F46 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		67818A3E2CA2CA3000CE5B9A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -42,10 +107,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		674AC70E2CC16F4800FB4F46 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				674AC70F2CC16F4800FB4F46 /* WidgetKit.framework */,
+				674AC7112CC16F4800FB4F46 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		67818A382CA2CA3000CE5B9A = {
 			isa = PBXGroup;
 			children = (
 				67818A432CA2CA3000CE5B9A /* SyncTime */,
+				674AC7132CC16F4800FB4F46 /* Time Widget */,
+				674AC70E2CC16F4800FB4F46 /* Frameworks */,
 				67818A422CA2CA3000CE5B9A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				67818A412CA2CA3000CE5B9A /* SyncTime.app */,
+				674AC70D2CC16F4800FB4F46 /* Time WidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -61,6 +138,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		674AC70C2CC16F4800FB4F46 /* Time WidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 674AC7222CC16F4A00FB4F46 /* Build configuration list for PBXNativeTarget "Time WidgetExtension" */;
+			buildPhases = (
+				674AC7092CC16F4800FB4F46 /* Sources */,
+				674AC70A2CC16F4800FB4F46 /* Frameworks */,
+				674AC70B2CC16F4800FB4F46 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				674AC7132CC16F4800FB4F46 /* Time Widget */,
+			);
+			name = "Time WidgetExtension";
+			packageProductDependencies = (
+			);
+			productName = "Time WidgetExtension";
+			productReference = 674AC70D2CC16F4800FB4F46 /* Time WidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		67818A402CA2CA3000CE5B9A /* SyncTime */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 67818A502CA2CA3100CE5B9A /* Build configuration list for PBXNativeTarget "SyncTime" */;
@@ -68,10 +167,12 @@
 				67818A3D2CA2CA3000CE5B9A /* Sources */,
 				67818A3E2CA2CA3000CE5B9A /* Frameworks */,
 				67818A3F2CA2CA3000CE5B9A /* Resources */,
+				674AC71F2CC16F4A00FB4F46 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				674AC71D2CC16F4A00FB4F46 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				67818A432CA2CA3000CE5B9A /* SyncTime */,
@@ -90,9 +191,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1600;
+				LastSwiftUpdateCheck = 1610;
 				LastUpgradeCheck = 1610;
 				TargetAttributes = {
+					674AC70C2CC16F4800FB4F46 = {
+						CreatedOnToolsVersion = 16.1;
+					};
 					67818A402CA2CA3000CE5B9A = {
 						CreatedOnToolsVersion = 16.0;
 					};
@@ -113,11 +217,19 @@
 			projectRoot = "";
 			targets = (
 				67818A402CA2CA3000CE5B9A /* SyncTime */,
+				674AC70C2CC16F4800FB4F46 /* Time WidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		674AC70B2CC16F4800FB4F46 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		67818A3F2CA2CA3000CE5B9A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -128,6 +240,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		674AC7092CC16F4800FB4F46 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		67818A3D2CA2CA3000CE5B9A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -137,7 +256,95 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		674AC71D2CC16F4A00FB4F46 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 674AC70C2CC16F4800FB4F46 /* Time WidgetExtension */;
+			targetProxy = 674AC71C2CC16F4A00FB4F46 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		674AC7202CC16F4A00FB4F46 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = "Time Widget/Time_Widget.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7DKPSXJRS9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Time Widget/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Time Widget";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wehavesun.SyncTime.Time-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 2.1;
+			};
+			name = Debug;
+		};
+		674AC7212CC16F4A00FB4F46 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = "Time Widget/Time_Widget.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7DKPSXJRS9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Time Widget/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Time Widget";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wehavesun.SyncTime.Time-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 2.1;
+			};
+			name = Release;
+		};
 		67818A4E2CA2CA3100CE5B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -269,6 +476,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SyncTime/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -310,6 +519,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SyncTime/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -339,6 +550,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		674AC7222CC16F4A00FB4F46 /* Build configuration list for PBXNativeTarget "Time WidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				674AC7202CC16F4A00FB4F46 /* Debug */,
+				674AC7212CC16F4A00FB4F46 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		67818A3C2CA2CA3000CE5B9A /* Build configuration list for PBXProject "SyncTime" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

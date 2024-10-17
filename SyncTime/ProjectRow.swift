@@ -1,4 +1,5 @@
 import SwiftUI
+import ActivityKit
 import SwiftData
 
 @Observable
@@ -12,6 +13,12 @@ class ProjectModel {
 struct ProjectRowView: View {
     @Environment(\.modelContext) var modelContext
     @Bindable var project: Project
+    
+    
+    //Live Activity
+    @State private var isTrackingTime: Bool = false
+    @State private var startTime: Date? = nil
+    @State private var activity: Activity<TimerAttributes>? = nil
     
     //new
 //    var project: ProjectModel
@@ -34,6 +41,7 @@ struct ProjectRowView: View {
                         .onTapGesture {
                             addTime(to: project)
                             updateZeroDurationExists()
+                            startLiveActivity(projectName: project.name, startTime: .now)
                         }
                 }
                 if project.hasRunningTimers {
@@ -41,6 +49,8 @@ struct ProjectRowView: View {
                     .onTapGesture {
                         calculateDurationAndPause(for: project)
                         updateZeroDurationExists()
+                        endLiveActivity(projectName: project.name, startTime: .now)
+                        
                     }
                 }
                 
@@ -110,6 +120,29 @@ struct ProjectRowView: View {
         } catch {
            print(error)
         }
+    }
+    func startLiveActivity(projectName: String = "", startTime: Date?) {
+        let attributes = TimerAttributes()
+        let state = TimerAttributes.ContentState(startTime: startTime ?? .now, projectName: projectName)
+        do {
+                activity = try Activity.request(
+                    attributes: attributes,
+                    content: .init(state: state, staleDate: nil)
+                )
+            } catch {
+                print("Error starting Live Activity: \(error)")
+            }
+    }
+    func endLiveActivity(projectName: String = "", startTime: Date?) {
+        guard let startTime else { return }
+        let state = TimerAttributes.ContentState(startTime: startTime, projectName: projectName)
+        Task {
+            await activity?.end(
+                .init(state: state, staleDate: nil),
+                    dismissalPolicy: .immediate
+                )
+        }
+        self.startTime = nil
     }
 }
 

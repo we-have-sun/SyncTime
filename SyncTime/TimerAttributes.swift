@@ -1,8 +1,11 @@
-//
-//  TimerAttributes.swift
-//  SyncTime
-//
-//  Created by Nicho on 17/10/2024.
-//
+import ActivityKit
+import SwiftUI
 
-import Foundation
+struct TimerAttributes: ActivityAttributes {
+    public typealias TimerStatus = ContentState
+    public struct ContentState: Codable, Hashable {
+        var startTime: Date
+        var projectName: String
+    }
+    
+}
