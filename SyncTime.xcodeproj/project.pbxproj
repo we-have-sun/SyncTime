@@ -54,7 +54,7 @@
 		674AC72E2CC1736100FB4F46 /* Exceptions for "SyncTime" folder in "Time WidgetExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				TimerAttributes.swift,
+				Utils/TimerAttributes.swift,
 			);
 			target = 674AC70C2CC16F4800FB4F46 /* Time WidgetExtension */;
 		};

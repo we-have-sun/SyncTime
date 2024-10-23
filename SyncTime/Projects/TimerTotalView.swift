@@ -1,7 +1,7 @@
 import SwiftUI
 import SwiftData
 
-struct TimerTotal: View {
+struct TimerTotalView: View {
     var project: ProjectModel
     init(project: Project) {
             let projectModel = ProjectModel(project: project)

@@ -7,7 +7,7 @@ class Project {
     var creationDate: Date = Date.now
     var times: [Time]? = [Time]()
     
-    var unwrappedTimes: [Time] {
+    private var unwrappedTimes: [Time] {
         times ?? []
     }
     

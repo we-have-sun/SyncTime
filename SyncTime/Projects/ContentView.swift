@@ -6,15 +6,16 @@ struct ContentView: View {
     var body: some View {
         ProjectView()
     }
-    
+}
+
+
+#Preview("With Projects") {
+    ContentView()
+        .modelContainer(DataController.previewWithProjects)
 }
 
 #Preview("Empty Screen") {
     ContentView()
-        .modelContainer(DataController.previewContainer)
+        .modelContainer(DataController.previewEmpty)
 }
 
-#Preview("With Projects") {
-    ContentView()
-        .modelContainer(DataController.previewContainer)
-}

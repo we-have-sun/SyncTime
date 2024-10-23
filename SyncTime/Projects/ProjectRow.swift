@@ -27,13 +27,7 @@ struct ProjectRowView: View {
     @State private var activity: Activity<TimerAttributes>? = nil
 #endif
     
-    //new
-//    var project: ProjectModel
-//    init(project: Project) {
-//            let projectModel = ProjectModel(project: project)
-//            self.project = projectModel
-//        }
-//    
+    //TODO: Use a Predicate
     @Query private var times: [Time]
     private var timesByProjects: [Time] {
         times.filter { $0.project?.id == project.id}
@@ -50,6 +44,7 @@ struct ProjectRowView: View {
                             updateZeroDurationExists()
                             
                             #if os(iOS)
+                            //TODO: end all Activities before starting this one
                             startLiveActivity(projectName: project.name, startTime: .now)
                             #endif
                             
@@ -75,7 +70,7 @@ struct ProjectRowView: View {
                     .font(.title2)
 //                  .foregroundStyle(project.hasRunningTimers ? .red : .black)
                 TimeDisplay(project: project)
-                TimerTotal(project: project)
+                TimerTotalView(project: project)
             }
             
             }
@@ -109,6 +104,9 @@ struct ProjectRowView: View {
         if let zeroDurationTime = times.first(where: { $0.duration == 0 }) {
             if zeroDurationTime.startDate != nil {
                 zeroDurationTime.duration = Int64(Date().timeIntervalSince(zeroDurationTime.startDate ?? Date.now))
+                zeroDurationTime.endDate = Date.now
+                
+                
                 zeroDurationTime.isRunning = false
                 //project.times?.append(zeroDurationTime)
                 
@@ -165,6 +163,14 @@ struct ProjectRowView: View {
 
 
 
+#Preview {
+    NavigationStack {
+        if let firstProject = try? DataController.previewWithProjects.mainContext.fetch(FetchDescriptor<Project>()).last {
+            ProjectRowView(project: firstProject)
+        }
+    }
+    .modelContainer(DataController.previewWithProjects)
+}
 
 
 

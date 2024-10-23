@@ -1,16 +1,9 @@
-//
-//  PreviewContainer.swift
-//  SyncTime
-//
-//  Created by Nicho on 16/10/2024.
-//
-
 import SwiftUI
 import SwiftData
 
 @MainActor
 class DataController {
-    static let previewContainer: ModelContainer = {
+    static let previewWithProjects: ModelContainer = {
         do {
             let config = ModelConfiguration(isStoredInMemoryOnly: true)
             let schema = Schema([Project.self, Time.self])
@@ -42,23 +35,16 @@ class DataController {
             fatalError("Failed to create model container for previewing: \(error.localizedDescription)")
         }
     }()
+    
+    static let previewEmpty: ModelContainer = {
+        do {
+            let config = ModelConfiguration(isStoredInMemoryOnly: true)
+            let schema = Schema([Project.self, Time.self])
+            let container = try ModelContainer(for: schema, configurations: config)
+
+            return container
+        } catch {
+            fatalError("Failed to create model container for previewing: \(error.localizedDescription)")
+        }
+    }()
 }
-
-
-//struct PreviewContainer {
-//    let container: ModelContainer!
-//    init(_ types: [any PersistentModel.Type],
-//    isStoredInMemoryOnly: Bool = true) {
-//        let schema = Schema(types)
-//        let config = ModelConfiguration(isStoredInMemoryOnly: true)
-//        self.container = try! ModelContainer(for: schema, configurations: config)
-//    }
-//    func add(items: [any PersistentModel]) {
-//        Task { @MainActor in
-//            items.forEach {
-//                container.mainContext.insert($0)
-//            }
-//        }
-//        
-//    }
-//}

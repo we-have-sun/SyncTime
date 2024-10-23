@@ -1,10 +1,3 @@
-//
-//  Time.swift
-//  SyncTime
-//
-//  Created by Nicho on 24/09/2024.
-//
-
 import Foundation
 import SwiftData
 
@@ -14,23 +7,24 @@ class Time: NSCopying  {
     var duration: Int64 = 0
     var isRunning: Bool = false
     var startDate: Date? = Date.now
+    var endDate: Date? = nil
     var project: Project?
     
-    //Event: startDate, endDate = startDate
-    //Interval: startDate, endDate? (no value means it's running), method to calculate to duration.
-    
-    
-    init(name: String, duration: Int64, startDate: Date, project: Project? = nil, isRunning: Bool) {
+    init(name: String, duration: Int64, startDate: Date, endDate: Date? = nil, project: Project? = nil, isRunning: Bool) {
         self.name = name
         self.duration = duration
         self.startDate = startDate
+        self.endDate = endDate
         self.isRunning = isRunning
         self.project = project
     }
     
     func copy(with zone: NSZone? = nil) -> Any {
-        let copy = Time(name: name, duration: duration, startDate:startDate ?? Date.now, isRunning: isRunning)
+        let copy = Time(name: name, duration: duration, startDate:startDate ?? Date.now, endDate:endDate ?? Date.now, isRunning: isRunning)
             return copy
         }
+    func calculatedDuration() -> Int64 {
+        return Int64(endDate?.timeIntervalSince(startDate!) ?? 0)
+    }
     
 }

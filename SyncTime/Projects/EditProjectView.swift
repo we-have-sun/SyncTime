@@ -37,3 +37,11 @@ struct EditProjectView: View {
         #endif
     }
 }
+#Preview {
+    NavigationStack {
+        if let firstProject = try? DataController.previewWithProjects.mainContext.fetch(FetchDescriptor<Project>()).first {
+            EditProjectView(project: firstProject)
+        }
+    }
+    .modelContainer(DataController.previewWithProjects)
+}
