@@ -1,5 +1,9 @@
-import SwiftUI
+
+#if canImport(ActivityKit)
 import ActivityKit
+#endif
+
+import SwiftUI
 import SwiftData
 
 @Observable
@@ -18,7 +22,10 @@ struct ProjectRowView: View {
     //Live Activity
     @State private var isTrackingTime: Bool = false
     @State private var startTime: Date? = nil
+    
+#if os(iOS)
     @State private var activity: Activity<TimerAttributes>? = nil
+#endif
     
     //new
 //    var project: ProjectModel
@@ -41,7 +48,11 @@ struct ProjectRowView: View {
                         .onTapGesture {
                             addTime(to: project)
                             updateZeroDurationExists()
+                            
+                            #if os(iOS)
                             startLiveActivity(projectName: project.name, startTime: .now)
+                            #endif
+                            
                         }
                 }
                 if project.hasRunningTimers {
@@ -49,7 +60,10 @@ struct ProjectRowView: View {
                     .onTapGesture {
                         calculateDurationAndPause(for: project)
                         updateZeroDurationExists()
+                        
+#if os(iOS)
                         endLiveActivity(projectName: project.name, startTime: .now)
+#endif
                         
                     }
                 }
@@ -76,6 +90,7 @@ struct ProjectRowView: View {
     func updateZeroDurationExists() {
         zeroDurationExists = timesByProjects.contains { $0.duration == 0 }
         }
+    
     @MainActor
     func addTime(to project: Project) {
         let time = Time(name: "", duration: 0, startDate: .now, isRunning: true)
@@ -121,6 +136,7 @@ struct ProjectRowView: View {
            print(error)
         }
     }
+#if os(iOS)
     func startLiveActivity(projectName: String = "", startTime: Date?) {
         let attributes = TimerAttributes()
         let state = TimerAttributes.ContentState(startTime: startTime ?? .now, projectName: projectName)
@@ -144,6 +160,7 @@ struct ProjectRowView: View {
         }
         self.startTime = nil
     }
+#endif
 }
 
 

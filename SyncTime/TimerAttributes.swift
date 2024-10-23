@@ -1,6 +1,9 @@
+#if canImport(ActivityKit)
 import ActivityKit
-import SwiftUI
+#endif
 
+import SwiftUI
+#if os(iOS)
 struct TimerAttributes: ActivityAttributes {
     public typealias TimerStatus = ContentState
     public struct ContentState: Codable, Hashable {
@@ -9,3 +12,4 @@ struct TimerAttributes: ActivityAttributes {
     }
     
 }
+#endif

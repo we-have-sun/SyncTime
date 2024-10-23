@@ -4,12 +4,15 @@
 //
 //  Created by Nicho on 17/10/2024.
 //
+#if canImport(ActivityKit)
 import ActivityKit
+#endif
+
 import WidgetKit
 import SwiftUI
 
 
-
+#if os(iOS)
 struct TimerActivityView: View {
     let context: ActivityViewContext<TimerAttributes>
     
@@ -53,4 +56,4 @@ struct Time_Widget: Widget {
         }
     }
 
-
+#endif
